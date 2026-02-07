@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Date? 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('bg.jpg') center center / cover no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 182, 193, 0.2);
+            pointer-events: none;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 1;
+            position: relative;
+        }
+
+        .image-container {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto 30px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .message-box {
+            background: rgba(139, 115, 105, 0.9);
+            padding: 25px 50px;
+            border-radius: 50px;
+            margin: 20px auto;
+            max-width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .message-box h1 {
+            font-size: 48px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .message-box p {
+            font-size: 28px;
+            color: #000;
+            font-weight: 500;
+        }
+
+        .question-box {
+            background: rgba(139, 115, 105, 0.9);
+            padding: 30px 60px;
+            border-radius: 30px;
+            margin: 20px auto;
+            max-width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-box h2 {
+            font-size: 36px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        button {
+            background: rgba(139, 115, 105, 0.9);
+            color: #000;
+            font-size: 48px;
+            font-weight: bold;
+            padding: 20px 80px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(139, 115, 105, 1);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .final-message {
+            background: rgba(139, 115, 105, 0.9);
+            padding: 40px 60px;
+            border-radius: 30px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .final-message h2 {
+            font-size: 36px;
+            color: #000;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .final-message p {
+            font-size: 24px;
+            color: #000;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .warning-box {
+            background: rgba(139, 115, 105, 0.9);
+            padding: 40px 60px;
+            border-radius: 30px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .warning-box h2 {
+            font-size: 48px;
+            color: #d00;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .image-container {
+                width: 300px;
+                height: 300px;
+            }
+
+            .message-box h1 {
+                font-size: 36px;
+            }
+
+            .question-box h2 {
+                font-size: 24px;
+            }
+
+            button {
+                font-size: 36px;
+                padding: 15px 50px;
+            }
+
+            .buttons {
+                gap: 30px;
+                flex-wrap: wrap;
+            }
+
+            .final-message p {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Screen 1: Welcome -->
+    <div id="screen1" class="screen active">
+        <div class="container">
+            <div class="image-container">
+                <img src="cat1.jpg" alt="Cute cat">
+            </div>
+            <div class="message-box">
+                <h1>Hi Baby!</h1>
+            </div>
+            <button onclick="goToScreen2()">Start</button>
+        </div>
+    </div>
+
+    <!-- Screen 2: The Question -->
+    <div id="screen2" class="screen">
+        <div class="container">
+            <div class="image-container">
+                <img id="questionImage" src="dog.jpg" alt="Cute animal">
+            </div>
+            <div class="question-box">
+                <h2>will you be my date for valentines?</h2>
+            </div>
+            <div class="buttons">
+                <button onclick="handleYes()">Yes</button>
+                <button id="noButton" onclick="handleNo()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 3: Yes Response -->
+    <div id="screen3" class="screen">
+        <div class="container">
+            <div class="image-container">
+                <img src="cat4.jpg" alt="Cute cat">
+            </div>
+            <div class="final-message">
+                <h2>thank you so much baby!!!</h2>
+                <p>is it okay if budget date lang muna? Student pa kasi baby mo hehe 💕</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 4: Warning -->
+    <div id="screen4" class="screen">
+        <div class="container">
+            <div class="image-container">
+                <img src="cat3.jpg" alt="Cute cat">
+            </div>
+            <div class="warning-box">
+                <h2>Choose wisely!</h2>
+            </div>
+            <button onclick="backToQuestion()">Okay</button>
+        </div>
+    </div>
+
+    <script>
+        let noCount = 0;
+        let afterWarning = false;
+
+        function goToScreen2() {
+            document.getElementById('screen1').classList.remove('active');
+            document.getElementById('screen2').classList.add('active');
+        }
+
+        function handleYes() {
+            document.getElementById('screen2').classList.remove('active');
+            document.getElementById('screen3').classList.add('active');
+        }
+
+        function handleNo() {
+            noCount++;
+            const questionImage = document.getElementById('questionImage');
+            
+            if (afterWarning) {
+                // After warning, change image to cat7 and buttons to both "Yes"
+                questionImage.src = 'cat7.jpg';
+                const noButton = document.getElementById('noButton');
+                noButton.textContent = 'Yes';
+                noButton.onclick = handleYes;
+            } else if (noCount === 1) {
+                // First "No" - change to dog1
+                questionImage.src = 'dog1.jpg';
+            } else if (noCount === 2) {
+                // Second "No" - change to cat5
+                questionImage.src = 'cat5.jpg';
+            } else if (noCount >= 3) {
+                // Third "No" - change to cat6, then show warning
+                questionImage.src = 'cat6.jpg';
+                setTimeout(() => {
+                    document.getElementById('screen2').classList.remove('active');
+                    document.getElementById('screen4').classList.add('active');
+                }, 500);
+            }
+        }
+
+        function backToQuestion() {
+            afterWarning = true;
+            noCount = 0;
+            const questionImage = document.getElementById('questionImage');
+            questionImage.src = 'cat6.jpg';
+            document.getElementById('screen4').classList.remove('active');
+            document.getElementById('screen2').classList.add('active');
+        }
+    </script>
+</body>
+</html>
